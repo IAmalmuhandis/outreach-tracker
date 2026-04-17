@@ -1134,6 +1134,17 @@ app.get("/auth", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "auth.html"));
 });
 
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.get(/^\/(?!api\/).*/, (req, res, next) => {
+  if (req.path === "/auth" || req.path === "/guide") {
+    return next();
+  }
+  return res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 async function start() {
   try {
     await mongoose.connect(MONGODB_URI);
