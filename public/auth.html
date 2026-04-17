@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YARE Authentication</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>YARE Outreach Assistant</h1>
+        <p>Sign in to continue.</p>
+      </div>
+    </header>
+
+    <section id="authScreen" class="auth-screen">
+      <div class="auth-card">
+        <h2>Secure Access</h2>
+        <p class="muted">Use your account to access outreach data.</p>
+        <div class="auth-tabs">
+          <button id="showSigninBtn" class="btn btn-muted" type="button">Sign In</button>
+          <button id="showSignupBtn" class="btn btn-muted" type="button">Sign Up</button>
+        </div>
+        <form id="signinForm" class="stack">
+          <input name="email" type="email" placeholder="Email" required />
+          <input name="password" type="password" placeholder="Password" required />
+          <button class="btn" type="submit">Sign In</button>
+        </form>
+        <form id="signupForm" class="stack" hidden>
+          <input name="fullName" placeholder="Full name" required />
+          <input name="email" type="email" placeholder="Email" required />
+          <input name="password" type="password" placeholder="Password (min 8 characters)" minlength="8" required />
+          <button class="btn" type="submit">Create Account</button>
+        </form>
+      </div>
+    </section>
+
+    <script src="./auth.js"></script>
+  </body>
+</html>

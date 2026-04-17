@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YARE Outreach Assistant</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>YARE Outreach Assistant</h1>
+        <p>Professional outreach CRM for structured organization tracking.</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="logoutBtn" class="btn btn-muted" type="button">Logout</button>
+        <button id="importDocxBtn" class="btn btn-outline">Import Organizations from DOCX</button>
+        <input id="importDocxInput" type="file" accept=".doc,.docx" hidden />
+        <button id="deleteAllBtn" class="btn btn-danger" type="button">Delete All Organizations</button>
+      </div>
+    </header>
+    <div id="statusBanner" class="status-banner" hidden></div>
+
+    <main class="layout">
+      <section class="panel panel-wide">
+        <div class="panel-head">
+          <h2>Organizations</h2>
+        </div>
+        <div class="filters filters-grid">
+          <input id="searchInput" type="search" placeholder="Search org, ID, category, notes, contacts..." />
+          <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="Not Started">Not Started</option>
+            <option value="Researching">Researching</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Meeting Scheduled">Meeting Scheduled</option>
+            <option value="In Discussion">In Discussion</option>
+            <option value="Won">Won</option>
+            <option value="Paused">Paused</option>
+          </select>
+          <select id="priorityFilter">
+            <option value="all">All priorities</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <select id="categoryFilter">
+            <option value="all">All categories</option>
+          </select>
+          <select id="subcategoryFilter">
+            <option value="all">All subcategories</option>
+          </select>
+          <select id="countryFilter">
+            <option value="all">All countries</option>
+          </select>
+          <select id="tierFilter">
+            <option value="all">All priority tiers</option>
+          </select>
+          <select id="documentsFilter">
+            <option value="all">All document states</option>
+            <option value="yes">With documents</option>
+            <option value="no">Without documents</option>
+          </select>
+          <button id="clearFiltersBtn" class="btn btn-muted" type="button">Clear Filters</button>
+        </div>
+        <div id="statsRow" class="stats-row"></div>
+        <div id="orgList" class="org-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Add Organization</h2>
+        <form id="orgForm" class="stack">
+          <input name="name" placeholder="Organization name *" required />
+          <select id="formCategory" name="category">
+            <option value="">Select category</option>
+          </select>
+          <select id="formSubcategory" name="subcategory">
+            <option value="">Select subcategory</option>
+          </select>
+          <select id="formState" name="state">
+            <option value="Federal Capital Territory (Abuja)" selected>Federal Capital Territory (Abuja)</option>
+            <option value="Abia">Abia</option>
+            <option value="Adamawa">Adamawa</option>
+            <option value="Akwa Ibom">Akwa Ibom</option>
+            <option value="Anambra">Anambra</option>
+            <option value="Bauchi">Bauchi</option>
+            <option value="Bayelsa">Bayelsa</option>
+            <option value="Benue">Benue</option>
+            <option value="Borno">Borno</option>
+            <option value="Cross River">Cross River</option>
+            <option value="Delta">Delta</option>
+            <option value="Ebonyi">Ebonyi</option>
+            <option value="Edo">Edo</option>
+            <option value="Ekiti">Ekiti</option>
+            <option value="Enugu">Enugu</option>
+            <option value="Gombe">Gombe</option>
+            <option value="Imo">Imo</option>
+            <option value="Jigawa">Jigawa</option>
+            <option value="Kaduna">Kaduna</option>
+            <option value="Kano">Kano</option>
+            <option value="Katsina">Katsina</option>
+            <option value="Kebbi">Kebbi</option>
+            <option value="Kogi">Kogi</option>
+            <option value="Kwara">Kwara</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Nasarawa">Nasarawa</option>
+            <option value="Niger">Niger</option>
+            <option value="Ogun">Ogun</option>
+            <option value="Ondo">Ondo</option>
+            <option value="Osun">Osun</option>
+            <option value="Oyo">Oyo</option>
+            <option value="Plateau">Plateau</option>
+            <option value="Rivers">Rivers</option>
+            <option value="Sokoto">Sokoto</option>
+            <option value="Taraba">Taraba</option>
+            <option value="Yobe">Yobe</option>
+            <option value="Zamfara">Zamfara</option>
+          </select>
+          <input name="country" value="Nigeria" />
+          <input name="location" placeholder="Location" />
+          <input name="website" type="url" placeholder="Website URL" />
+          <select name="priority">
+            <option value="High">High priority</option>
+            <option value="Medium" selected>Medium priority</option>
+            <option value="Low">Low priority</option>
+          </select>
+          <select name="status">
+            <option value="Not Started" selected>Not Started</option>
+            <option value="Researching">Researching</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Meeting Scheduled">Meeting Scheduled</option>
+            <option value="In Discussion">In Discussion</option>
+            <option value="Won">Won</option>
+            <option value="Paused">Paused</option>
+          </select>
+          <textarea name="notes" rows="4" placeholder="Notes"></textarea>
+          <button class="btn" type="submit">Add Organization</button>
+        </form>
+      </section>
+    </main>
+
+    <template id="orgItemTemplate">
+      <article class="org-card">
+        <button class="delete-btn" type="button">Delete</button>
+        <h3></h3>
+        <div class="meta"></div>
+        <p class="notes"></p>
+        <div class="chips"></div>
+      </article>
+    </template>
+
+    <div id="orgModal" class="modal-shell" hidden>
+      <div id="orgModalBackdrop" class="modal-backdrop"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="orgModalTitle">
+        <div class="modal-head">
+          <h2 id="orgModalTitle">Organization</h2>
+          <button id="closeOrgModalBtn" class="icon-btn" type="button" aria-label="Close">X</button>
+        </div>
+        <div class="modal-body">
+          <div id="orgDetails" class="stack muted">Pick an organization to manage contacts and outreach logs.</div>
+          <section class="panel panel-guide modal-guide">
+            <div class="panel-head">
+              <h2>Outreach Guide</h2>
+              <button id="openGuideModalBtn" class="btn btn-muted" type="button">Open Full Guide</button>
+            </div>
+            <p class="muted">Interactive checklist saves per selected organization.</p>
+            <div id="guideChecklist" class="stack muted">Select an organization to start ticking guide items.</div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="guideModal" class="modal-shell" hidden>
+      <div id="guideModalBackdrop" class="modal-backdrop"></div>
+      <div class="modal-card guide-modal-card" role="dialog" aria-modal="true" aria-labelledby="guideModalTitle">
+        <div class="modal-head">
+          <h2 id="guideModalTitle">YARE Full Outreach Guide</h2>
+          <button id="closeGuideModalBtn" class="icon-btn" type="button" aria-label="Close">X</button>
+        </div>
+        <div class="modal-body guide-modal-body">
+          <input id="guideSearchInput" type="search" placeholder="Search guide..." />
+          <div id="guideModalContent" class="guide-modal-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirmModal" class="modal-shell" hidden>
+      <div class="modal-backdrop"></div>
+      <div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <h3 id="confirmTitle">Confirm Action</h3>
+        <p id="confirmMessage"></p>
+        <div class="confirm-actions">
+          <button id="confirmCancelBtn" class="btn btn-muted" type="button">Cancel</button>
+          <button id="confirmApproveBtn" class="btn btn-danger" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
