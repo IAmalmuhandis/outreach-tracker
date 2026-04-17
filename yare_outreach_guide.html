@@ -1,0 +1,280 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); color: var(--color-text-primary); }
+  .container { padding: 1.5rem 0; }
+  .section { margin-bottom: 2rem; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .section-title { font-size: 16px; font-weight: 500; }
+  .badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+  .badge-purple { background: #EEEDFE; color: #3C3489; }
+  .badge-teal { background: #E1F5EE; color: #085041; }
+  .badge-amber { background: #FAEEDA; color: #633806; }
+  .badge-blue { background: #E6F1FB; color: #0C447C; }
+  .badge-coral { background: #FAECE7; color: #712B13; }
+  .badge-green { background: #EAF3DE; color: #27500A; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 10px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.1rem; }
+  .card-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .card-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
+  .tip-list { list-style: none; }
+  .tip-list li { font-size: 13px; line-height: 1.7; color: var(--color-text-primary); padding: 8px 0 8px 20px; border-bottom: 0.5px solid var(--color-border-tertiary); position: relative; }
+  .tip-list li:last-child { border-bottom: none; }
+  .tip-list li::before { content: '→'; position: absolute; left: 0; color: var(--color-text-secondary); font-size: 12px; top: 10px; }
+  .checklist { list-style: none; }
+  .checklist li { font-size: 13px; line-height: 1.6; padding: 7px 0 7px 24px; border-bottom: 0.5px solid var(--color-border-tertiary); position: relative; color: var(--color-text-primary); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '☐'; position: absolute; left: 0; color: var(--color-text-secondary); font-size: 13px; top: 7px; }
+  .priority-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .priority-row:last-child { border-bottom: none; }
+  .priority-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .priority-org { font-size: 13px; font-weight: 500; flex: 1; }
+  .priority-why { font-size: 12px; color: var(--color-text-secondary); }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tab { font-size: 12px; padding: 6px 14px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: transparent; cursor: pointer; color: var(--color-text-secondary); font-family: var(--font-sans); }
+  .tab.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .phase { display: flex; gap: 14px; margin-bottom: 1rem; padding: 1rem; background: var(--color-background-secondary); border-radius: var(--border-radius-md); }
+  .phase-num { font-size: 22px; font-weight: 500; color: var(--color-text-secondary); flex-shrink: 0; line-height: 1; }
+  .phase-content { flex: 1; }
+  .phase-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .phase-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+  .objection { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.9rem 1rem; margin-bottom: 8px; }
+  .objection-q { font-size: 13px; font-weight: 500; color: #185FA5; margin-bottom: 6px; }
+  .objection-a { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+  h2 { font-size: 18px; font-weight: 500; margin-bottom: 1.5rem; }
+</style>
+
+<div class="container">
+  <h2>YARE Abuja Outreach — Founder's Field Guide</h2>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showPanel('prep')">Preparation</button>
+    <button class="tab" onclick="showPanel('priority')">Who to hit first</button>
+    <button class="tab" onclick="showPanel('approach')">How to show up</button>
+    <button class="tab" onclick="showPanel('pitch')">The pitch</button>
+    <button class="tab" onclick="showPanel('objections')">Objections</button>
+    <button class="tab" onclick="showPanel('followup')">After the meeting</button>
+  </div>
+
+  <div id="prep" class="panel active">
+    <div class="section">
+      <div class="section-header"><span class="section-title">Documents & materials to carry</span><span class="badge badge-purple">Must-haves</span></div>
+      <ul class="checklist">
+        <li>One-page YARE brief — what it is, the problem it solves, pricing tiers or "get in touch" CTA</li>
+        <li>A printed or ready-to-show portfolio of sample translations (English → Hausa, with context)</li>
+        <li>Your phone loaded with the YARE platform or a polished demo video (no buffering allowed — download it offline)</li>
+        <li>Business cards — name, title "Founder, YARE by Northino Tech", WhatsApp number, email</li>
+        <li>A short list of 2–3 reference questions tailored to each organisation before you walk in</li>
+        <li>Physical notebook — writing down someone's concerns in front of them signals you take them seriously</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-title">Research to do before each meeting</span><span class="badge badge-teal">Per-org prep</span></div>
+      <ul class="checklist">
+        <li>Look up the organisation's most recent project or campaign in Nigeria (mention it early)</li>
+        <li>Find the name of the specific person you're meeting — confirm spelling and title</li>
+        <li>Know one concrete pain point they've had with translation or localisation in the past</li>
+        <li>Check their vendor procurement process — are they open to pilot projects or do they need formal registration?</li>
+        <li>Look up if they've posted any translator job ads recently (Malaria Consortium have — use it)</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-title">What you should be able to quote from memory</span><span class="badge badge-amber">Know cold</span></div>
+      <div class="cards">
+        <div class="card"><div class="card-label">Market size</div><div class="card-text">Over 80 million Hausa speakers. Nigeria's most spoken first language. 17.7M weekly BBC Hausa listeners alone.</div></div>
+        <div class="card"><div class="card-label">YARE's edge</div><div class="card-text">AI-assisted speed + human native-speaker QA. Not a generic translation tool — built for African languages specifically.</div></div>
+        <div class="card"><div class="card-label">What you need from them</div><div class="card-text">A trial job. Not a contract. "Let us translate one document and show you the quality — no commitment."</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="priority" class="panel">
+    <div class="section">
+      <div class="section-header"><span class="section-title">Priority order — hit these first</span><span class="badge badge-coral">Sequenced</span></div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#E1F5EE;color:#085041;">1</div>
+        <div>
+          <div class="priority-org">GIZ Nigeria, USAID, UNICEF, WHO</div>
+          <div class="priority-why">Highest volume, fastest procurement, most reliable budgets. One contract = steady stream of platform jobs.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#E1F5EE;color:#085041;">2</div>
+        <div>
+          <div class="priority-org">Malaria Consortium Nigeria</div>
+          <div class="priority-why">They've publicly advertised for Hausa translators. Walk in with the solution to a problem they've already named.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#E1F5EE;color:#085041;">3</div>
+        <div>
+          <div class="priority-org">National Orientation Agency (NOA)</div>
+          <div class="priority-why">Government body whose entire mandate is localised communication. High-volume, consistent demand.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#FAEEDA;color:#633806;">4</div>
+        <div>
+          <div class="priority-org">Marketing agencies (DMi, IDCL Africa, Rage Media)</div>
+          <div class="priority-why">Build B2B pipeline. They resell localisation to their clients — YARE becomes their white-label tool.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#FAEEDA;color:#633806;">5</div>
+        <div>
+          <div class="priority-org">Tech hubs — Ventures Platform, Aiivon, Enspire</div>
+          <div class="priority-why">Credibility and network. Use relationships here to open government and investor doors.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#F1EFE8;color:#444441;">6</div>
+        <div>
+          <div class="priority-org">NITDA, Ministry of Communications, NPHCDA</div>
+          <div class="priority-why">Policy-level legitimacy. Harder to access but unlocks large government contracts. Use private sector wins to open these doors.</div>
+        </div>
+      </div>
+      <div class="priority-row">
+        <div class="priority-num" style="background:#F1EFE8;color:#444441;">7</div>
+        <div>
+          <div class="priority-org">Media houses, Kannywood, BBC Hausa, VON</div>
+          <div class="priority-why">Voice-over demand + PR. BBC Hausa and VON are also storytelling platforms — pitch as a story, not just a vendor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="approach" class="panel">
+    <div class="section">
+      <div class="section-header"><span class="section-title">How to present yourself</span><span class="badge badge-purple">Identity & presence</span></div>
+      <ul class="tip-list">
+        <li>You are a founder, not a salesperson. Lead with mission — "we're building language infrastructure for Africa" — not features.</li>
+        <li>Dress in smart Nigerian attire (traditional or fitted African wear) where culturally appropriate. At INGOs like GIZ or USAID, business casual or a clean traditional ensemble both work. At tech hubs, smart casual is fine. At government offices, err conservative.</li>
+        <li>Introduce yourself fully: "I'm [name], founder of YARE — a platform connecting African language translators and voice artists with organisations that need them." Always say your full name and your city of origin (Kano) when relevant — it builds trust with northern-facing organisations.</li>
+        <li>Don't open with "I have a startup." Open with the problem: "I noticed your organisation regularly commissions Hausa translations — I wanted to share what we've built to make that easier."</li>
+        <li>Speak with quiet confidence. You know the problem better than anyone in that room. You've lived it.</li>
+        <li>Be specific and brief. Have your one-liner ready: "YARE is a marketplace where organisations post translation and voice-over jobs, and verified native-speaker professionals deliver them — faster and cheaper than traditional agencies."</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-title">The approach phases</span><span class="badge badge-teal">Step by step</span></div>
+      <div class="phase">
+        <div class="phase-num">1</div>
+        <div class="phase-content"><div class="phase-title">Book the meeting (don't walk in cold to senior people)</div><div class="phase-text">Email + LinkedIn request + WhatsApp where available. Reference something specific: "I saw your recent Hausa campaign for [project] and wanted to discuss how YARE can support future work." For reception-level staff at INGOs, walking in with a brief is acceptable — ask for the Communications or Procurement officer.</div></div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">2</div>
+        <div class="phase-content"><div class="phase-title">Open by naming their world</div><div class="phase-text">In the first 60 seconds: reference something real about their work. "Your polio campaign in Sokoto last year — how did you handle the Hausa translation?" Show you've done your homework. People immediately relax when they realise you understand their context.</div></div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">3</div>
+        <div class="phase-content"><div class="phase-title">Listen more than you talk</div><div class="phase-text">Ask: "What's your current process for Hausa translation?" Then be quiet. Their answer tells you exactly how to pitch YARE. Don't interrupt. Write down what they say.</div></div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">4</div>
+        <div class="phase-content"><div class="phase-title">Pitch to the gap they just revealed</div><div class="phase-text">After they've described their problem, say: "That's exactly the gap YARE closes." Then explain how, specifically. You've now made them feel heard AND solved their problem.</div></div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">5</div>
+        <div class="phase-content"><div class="phase-title">Ask for a trial, not a contract</div><div class="phase-text">"Can we handle your next Hausa translation piece — no cost, no commitment — so you can see the quality firsthand?" Low-stakes yes. High-value proof. Trial projects almost always convert.</div></div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">6</div>
+        <div class="phase-content"><div class="phase-title">Leave with WhatsApp</div><div class="phase-text">Before you leave: "What's the best way to follow up with you — WhatsApp or email?" Get their WhatsApp number if they offer. In Abuja, this is where relationships actually move.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pitch" class="panel">
+    <div class="section">
+      <div class="section-header"><span class="section-title">Core talking points by audience type</span><span class="badge badge-blue">Messaging</span></div>
+      <div style="margin-bottom: 10px;" class="card">
+        <div class="card-label">International Development (GIZ, USAID, UNICEF, WHO)</div>
+        <div class="card-text">"Your community-level programmes need to reach people who speak Hausa, Fulfulde, and local languages — not English. YARE is a vetted marketplace of native-speaker translators and voice artists. We give you faster turnaround, cultural accuracy, and an audit trail your compliance team will love."</div>
+      </div>
+      <div style="margin-bottom: 10px;" class="card">
+        <div class="card-label">Marketing agencies</div>
+        <div class="card-text">"Your clients want to win in northern Nigeria. That means Hausa copy, Hausa voice-overs, culturally resonant content. YARE is how you deliver that without hiring in-house translators. White-label it to your clients and add a new revenue line."</div>
+      </div>
+      <div style="margin-bottom: 10px;" class="card">
+        <div class="card-label">Government (NOA, NPHCDA, NITDA)</div>
+        <div class="card-text">"Nigeria's digital inclusion agenda cannot reach northern communities in English. YARE is the infrastructure to change that — AI-assisted translation and localisation for Hausa, Fulfulde, and Yoruba, with human QA. We want to align with your mandate."</div>
+      </div>
+      <div style="margin-bottom: 10px;" class="card">
+        <div class="card-label">Media houses (BBC Hausa, VON, NTA)</div>
+        <div class="card-text">Two conversations: (1) Vendor pitch — "YARE connects you with professional Hausa voice artists and translators on demand." (2) Story pitch — "A Nigerian founder building AI for African languages is a story your audience cares about. Let's talk about both."</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Tech hubs & investors (Ventures Platform, Kola Aina)</div>
+        <div class="card-text">"YARE is not a translation app. We're building the linguistic infrastructure layer for Africa's digital economy — the API that every other African platform eventually needs. Language exclusion is the infrastructure gap nobody is talking about."</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="objections" class="panel">
+    <div class="section">
+      <div class="section-header"><span class="section-title">Likely objections & how to handle them</span><span class="badge badge-amber">Be ready</span></div>
+      <div class="objection">
+        <div class="objection-q">"We already have translators we work with."</div>
+        <div class="objection-a">Good — YARE doesn't replace your translators, it organises them. If they're already on our platform, you manage them there. If not, we can onboard them. Either way, your procurement process gets simpler and the quality layer is built in.</div>
+      </div>
+      <div class="objection">
+        <div class="objection-q">"How do we know the quality is good?"</div>
+        <div class="objection-a">That's the right question. Every translator on YARE goes through a native-speaker vetting process, and every translation has a human QA review. We also offer a free trial project — let us handle one piece and judge the quality yourself before any commitment.</div>
+      </div>
+      <div class="objection">
+        <div class="objection-q">"We use Google Translate / DeepL."</div>
+        <div class="objection-a">Generic tools perform poorly on Hausa and almost not at all on Fulfulde. They don't understand dialect, cultural reference, or register. For campaign communication where trust matters — health, civic messaging — a machine error in Hausa can actively undermine your programme. YARE uses AI to accelerate, but every output is reviewed by a human native speaker.</div>
+      </div>
+      <div class="objection">
+        <div class="objection-q">"We don't have budget right now."</div>
+        <div class="objection-a">Understood — we're not here for a contract today. We're here to start a relationship. When your next campaign cycle opens and you need Hausa content, YARE should be the first name you think of. Can I leave you our brief and follow up in a few weeks?</div>
+      </div>
+      <div class="objection">
+        <div class="objection-q">"We need to go through our procurement process."</div>
+        <div class="objection-a">Absolutely — that's exactly why we're here now, before you need it urgently. What does your procurement process look like? We can start registration now so that when the need arises, we're already approved and ready to go.</div>
+      </div>
+      <div class="objection">
+        <div class="objection-q">"How do we know YARE will still be around?"</div>
+        <div class="objection-a">Fair concern. We're Abuja and Kano-based, actively building, and we've designed YARE to serve Nigerian institutions specifically — not as a side project. Here's our founder's contact directly. You're not dealing with an agency; you're dealing with the person who built this.</div>
+      </div>
+      <div class="objection">
+        <div class="objection-q">"Can you do [language X] too?"</div>
+        <div class="objection-a">Our current depth is in Hausa and Fulfulde, with Yoruba and Igbo in development. If you have an immediate need in another language, tell us — we may already have translators in that language in our network, or we can onboard them for your project.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="followup" class="panel">
+    <div class="section">
+      <div class="section-header"><span class="section-title">Within 24 hours of every meeting</span><span class="badge badge-green">Follow-through</span></div>
+      <ul class="checklist">
+        <li>Send a WhatsApp (preferred) or email thanking them by name and referencing one specific thing they said</li>
+        <li>Attach the YARE one-pager if you haven't already shared it</li>
+        <li>Post a brief LinkedIn/X reflection: "Had a fascinating conversation today about [topic] — here's what I learned." Tag the organisation if appropriate. This builds public credibility while the meeting is fresh.</li>
+        <li>Log the meeting in a simple tracking sheet: person, org, what they said, next step, follow-up date</li>
+        <li>If they asked for something (more info, a sample translation, a deck) — deliver it within 48 hours, not a week</li>
+      </ul>
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-title">How to keep relationships warm</span><span class="badge badge-teal">Long game</span></div>
+      <ul class="tip-list">
+        <li>Follow up every 3–4 weeks if no active conversation — share a relevant article, a YARE milestone, or a question: "Thinking of you — are you planning any Hausa campaigns this quarter?"</li>
+        <li>Send something of value before you ask for something. A relevant news piece, a translation tip, an introduction to someone useful in your network.</li>
+        <li>Track their campaign cycles. INGOs budget annually. Government agencies have procurement windows. Know when they're planning and show up before their need is urgent.</li>
+        <li>When you do a successful trial job, ask for a one-line testimonial in writing. These become social proof for every subsequent pitch.</li>
+        <li>Build a WhatsApp broadcast list of all warm contacts. Monthly update: a YARE milestone, a case study, a piece of content — keep YARE top of mind without pestering individuals.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
